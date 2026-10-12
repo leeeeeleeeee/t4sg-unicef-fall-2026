@@ -8,6 +8,3 @@ Testing whether AI chatbots give accurate UNICEF statistics, compared against of
 - `pipeline/` – code that runs the tests
 - `results/` – model answers and scoring
 - `notes/` – meeting notes, hypotheses, findings
-
-## Team
-Pair C (Data and Tools): Lily, Shravya
