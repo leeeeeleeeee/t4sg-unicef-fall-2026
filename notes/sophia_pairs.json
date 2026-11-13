@@ -1,0 +1,56 @@
+[
+  {
+    "pair_id": "S01",
+    "axis": "style",
+    "baseline_id": "S01_A",
+    "variant_id": "S01_B"
+  },
+  {
+    "pair_id": "S02",
+    "axis": "style",
+    "baseline_id": "S02_A",
+    "variant_id": "S02_B"
+  },
+  {
+    "pair_id": "S03",
+    "axis": "style",
+    "baseline_id": "S03_A",
+    "variant_id": "S03_B"
+  },
+  {
+    "pair_id": "S04",
+    "axis": "wording",
+    "baseline_id": "S04_A",
+    "variant_id": "S04_B"
+  },
+  {
+    "pair_id": "S05",
+    "axis": "wording",
+    "baseline_id": "S05_A",
+    "variant_id": "S05_B"
+  },
+  {
+    "pair_id": "S06",
+    "axis": "wording",
+    "baseline_id": "S06_A",
+    "variant_id": "S06_B"
+  },
+  {
+    "pair_id": "S07",
+    "axis": "detail",
+    "baseline_id": "S07_A",
+    "variant_id": "S07_B"
+  },
+  {
+    "pair_id": "S08",
+    "axis": "detail",
+    "baseline_id": "S08_A",
+    "variant_id": "S08_B"
+  },
+  {
+    "pair_id": "S09",
+    "axis": "detail",
+    "baseline_id": "S09_A",
+    "variant_id": "S09_B"
+  }
+]
