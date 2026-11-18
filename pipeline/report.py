@@ -40,7 +40,8 @@ ID_PREFIX_TYPES = {"N": "Naive public", "R": "Academic researcher", "P": "Policy
 
 SURFACE, INK, INK_2, GRID, AXIS = "#fcfcfb", "#0b0b0b", "#52514e", "#e1e0d9", "#c3c2b7"
 SERIES = ["#2a78d6", "#eb6834", "#1baf7a", "#eda100", "#e87ba4", "#008300", "#6250d6", "#e34948"]
-SCORE_COLORS = {"Correct": "#0ca30c", "Close": "#fab219", "Wrong": "#d03b3b", "No number": "#b9b8b0"}
+SCORE_COLORS = {"Correct": "#0ca30c", "Close": "#fab219", "Wrong": "#d03b3b", "Portal lag": "#2a7ab9",
+                "No number": "#b9b8b0"}
 OFF_ON = {"off": "#b9b8b0", "on": "#2a78d6"}
 BLUES = ["#cde2fb", "#9ec5f4", "#6da7ec", "#3987e5", "#256abf", "#184f95", "#0d366b"]
 

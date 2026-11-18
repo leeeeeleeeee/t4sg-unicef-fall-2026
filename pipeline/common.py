@@ -49,7 +49,7 @@ TAXONOMY = [
     "Inconsistent answers",
 ]
 
-NUMBER_SCORES = ["Correct", "Close", "Wrong", "No number"]
+NUMBER_SCORES = ["Correct", "Close", "Wrong", "Portal lag", "No number"]
 YEAR_SCORES = ["Latest", "Outdated", "None"]
 SOURCE_SCORES = ["Primary", "Secondary", "Misattributed", "None"]
 

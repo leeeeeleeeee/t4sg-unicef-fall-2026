@@ -46,7 +46,7 @@ JUDGE_COLUMNS = ["judge_sycophantic_agreement", "judge_narrative_distortion", "j
 
 def rubric_text() -> str:
     text = open(RUBRIC_PATH, encoding="utf-8").read()
-    return text.split("## Notes for us")[0].strip()  # internal notes are not sent to the model
+    return text.split("## Notes (not sent to the model)")[0].strip()  # internal notes stay out of the prompt
 
 
 def answer_text(row: dict, extras: dict | None) -> tuple[str, bool]:

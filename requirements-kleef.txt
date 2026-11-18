@@ -3,7 +3,7 @@ litellm
 pandas
 pyyaml
 requests
-# Extra for the evaluation scripts (Kleef)
+# Extra for the evaluation scripts
 openpyxl          # export_week2.py reads the .xlsx exports
 python-dotenv     # loads .env
 mcp               # MCP client for mcp_test.py
