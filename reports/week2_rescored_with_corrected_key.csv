@@ -1,0 +1,91 @@
+id,model,mode,thinking,web_search,repeat,answer,headline_number,year_given,source_claimed,searched,caveat,number_score,year_score,source_score,error_types,input_tokens,output_tokens,cost,seconds,official_value,official_year,number_value,number_diff,score_notes
+N1,Claude Sonnet 5.5,cold,Y,Y,1,,"30 to 33 of every 1,000 children",2024,"UNICEF/WHO, Bangladesh Bureau of Statistics, 2022 Demographic and Health Survey",Y,Y,Correct,Latest,Primary,None,,,,,30.498,2024,31.5,+1.002,narrow range answer contains official value
+N1,ChatGPT GPT-6,cold,Unclear,Y,1,,"30.5 deaths per 1,000 live births",2024,UN IGME,Y,Y,Correct,Latest,Primary,None,,,,,30.498,2024,30.5,+0.002,
+N1,Gemini 3.5 Flash-Lite,cold,Unclear,Y,1,,"30 to 33 deaths per 1,000 live births",None given,UN IGME,Y,Y,Correct,None,Primary,None,,,,,30.498,2024,31.5,+1.002,narrow range answer contains official value
+R1,Claude Sonnet 5.5,cold,Y,Y,1,,"40 deaths per 1,000 live births",2022,WHO (UN IGME),Y,Y,Correct,Latest,Primary,None,,,,,39.654,2022,40,+0.346,inside a wide official range (31.22 to 50.42)
+R1,ChatGPT GPT-6,cold,Unclear,Y,1,,"39.7 deaths per 1,000 live births",2022,UNICEF,Y,Y,Correct,Latest,Primary,None,,,,,39.654,2022,39.7,+0.046,inside a wide official range (31.22 to 50.42)
+R1,Gemini 3.5 Flash-Lite,cold,Unclear,Y,1,,"40 deaths per 1,000 live births",2022,UNICEF,Y,Y,Correct,Latest,Primary,None,,,,,39.654,2022,40,+0.346,inside a wide official range (31.22 to 50.42)
+P1,Claude Sonnet 5.5,cold,Y,Y,1,,"~116 deaths per 1,000 live births",2024,UNICEF,Y,Y,Correct,Latest,Primary,None,,,,,115.6,2024,116,+0.4,inside a wide official range (98.8 to 136.2)
+P1,ChatGPT GPT-6,cold,Unclear,Y,1,,"115.6 deaths per 1,000 live births",2024,UNICEF,Y,Y,Correct,Latest,Primary,None,,,,,115.6,2024,115.6,+0,inside a wide official range (98.8 to 136.2)
+P1,Gemini 3.5 Flash-Lite,cold,Unclear,Y,1,,"115.6 deaths per 1,000 live births",2024,UN IGME,Y,Y,Correct,Latest,Primary,None,,,,,115.6,2024,115.6,+0,inside a wide official range (98.8 to 136.2)
+N4,Claude Sonnet 5.5,cold,Y,Y,1,,~3% (2.7%) of children under 5 registered,2016,"BMJ Global Health, Frontiers in Public Health, Capital Ethiopia, UNHCR brief",Y,Y,Correct,Latest,Secondary,None,,,,,2.7,2016,3,+0.3,
+N4,ChatGPT GPT-6 Luna High (Plus),cold,Y,Y,1,,21% of children have a birth certificate,2024-25,Ethiopia DHS 2024-25 (ess.gov.et),Y,N,Wrong,Latest,Primary,Wrong number; Missing caveat,,,,,2.7,2016,21,+18.3,
+N4,Gemini 3.5 Flash (CHECK),cold,Unclear,Y,1,,Roughly 30% to 37% registered (~two-thirds unregistered),None given,None (first answer named no source),Y,N,Wrong,None,None,Wrong number; Missing caveat,,,,,2.7,2016,33.5,+30.8,range answer scored at midpoint 33.5
+R4,Claude Sonnet 5.5,cold,Y,Y,1,,78% registered (2017),2017,"Indonesia DHS 2017 (FR342, BKKBN/BPS/MoH/ICF); UNICEF birth registration page",Y,Y,Wrong,Outdated,Primary,Wrong number; Outdated value,,,,,86.8,2025,78,-8.8,no official value for the year asked (data_exists=N)
+R4,ChatGPT GPT-6 Luna High (Plus),cold,Y,Y,1,,77.9% (~78%) registered (2017),2017,"UNICEF analysis; 2017 Indonesia DHS, Table 2.10, p.21",Y,Y,Wrong,Outdated,Primary,Wrong number; Outdated value,,,,,86.8,2025,77.9,-8.9,no official value for the year asked (data_exists=N)
+R4,Gemini 3.5 Flash (CHECK),cold,Unclear,Y,1,,78% (77.9%) registered (2017),2017,(FILL from first answer),Y,Y,Wrong,Outdated,None,Wrong number; Outdated value,,,,,86.8,2025,78,-8.8,no official value for the year asked (data_exists=N)
+T1-1,Claude Sonnet 5.5,cold,Y,Y,1,,~14%,2011,"UNICEF/WHO, 2011 DHS Survey",Y,Y,Close,Outdated,Primary,Outdated value,,,,,17.76,2020,14,-3.76,
+T1-1,ChatGPT GPT-6,cold,Unclear,Y,1,,~18%,2020,WHO/UNICEF,Y,Y,Correct,Latest,Primary,None,,,,,17.76,2020,18,+0.24,
+T1-1,Gemini 3.5 Flash-Lite,cold,Unclear,Y,1,,~15% to 18%,None given,UNICEF/WHO,Y,Y,Correct,None,Primary,None,,,,,17.76,2020,16.5,-1.26,narrow range answer contains official value
+T1-2,Claude Sonnet 5.5,cold,Y,Y,1,,33%,2010,"2010 Eritrea Population and Health Survey, UNICEF",Y,Y,Correct,Latest,Primary,None,,,,,33.2,2010,33,-0.2,
+T1-2,ChatGPT GPT-6,cold,Unclear,Y,1,,33.2%,2010,2010 Eritrea Population and Health Survey,Y,Y,Correct,Latest,Primary,None,,,,,33.2,2010,33.2,+0,
+T1-2,Gemini 3.5 Flash-Lite,cold,Unclear,Y,1,,33.2%,2010,"2010 EPHS, UNICEF",Y,Y,Correct,Latest,Primary,None,,,,,33.2,2010,33.2,+0,
+T1-3,Claude Sonnet 5.5,cold,Y,Y,1,,97.8% primary completion (MICS7 2024),2024,"Belize MICS7 2024 (Statistical Institute of Belize, UNICEF MICS)",Y,Y,Close,Latest,Primary,None,,,,,95.4,2016,97.8,+2.4,
+T1-3,ChatGPT GPT-6 Luna High (Plus),cold,Y,Y,1,,97.8% primary completion (MICS7 2024),2024,"Belize MICS7 2024 (Statistical Institute of Belize, UNICEF support)",Y,Y,Close,Latest,Primary,None,,,,,95.4,2016,97.8,+2.4,
+T1-3,Gemini 3.5 Flash (CHECK),cold,Unclear,Y,1,,94.2% primary completion (2024),2024,(FILL from first answer),Y,Y,Close,Latest,None,None,,,,,95.4,2016,94.2,-1.2,
+T1-4,Claude Sonnet 5.5,cold,Y,Y,1,,"No national figure given (""couldn't find an official national percentage"")",None given (for Cameroon facilities),"CBCHS/washinhcf.org, UNICEF Cameroon WASH page, WHO/UNICEF JMP 2022 and 2026 reports",Y,Y,No number,None,Primary,None,,,,,30.02,2025,,,
+T1-4,ChatGPT GPT-6 Luna High (Plus),cold,Y,Y,1,,"No national figure (""not enough national data"")",2023,WHO/UNICEF JMP 2023 facility data; Far North study (97 facilities); 103-facility assessment,Y,Y,No number,Outdated,Primary,Outdated value,,,,,30.02,2025,,,
+T1-4,Gemini 3.5 Flash (CHECK),cold,Unclear,Y,1,,No national facility figure (CHECK first answer),None given,(FILL from first answer),Y,Y,No number,None,None,None,,,,,30.02,2025,,,
+T1-5,Claude Sonnet 5.5,cold,Y,Y,1,,49% of infants got at least one DTP dose (DTP1),2025,"WHO/UNICEF estimates of immunization coverage (WUENIC), 2025 revision, Yemen (data.unicef.org)",Y,Y,Correct,Latest,Primary,None,,,,,49,2025,49,+0,
+T1-5,ChatGPT GPT-6 Luna High (Plus),cold,Y,Y,1,,"~670,000 infants (49% DTP1 coverage)",2025,WHO/UNICEF WUENIC 2025,Y,Y,Correct,Latest,Primary,None,,,,,49,2025,49,+0,
+T1-5,Gemini 3.5 Flash (CHECK),cold,Unclear,Y,1,,"49% DTP1 coverage (~675,000-700,000 children)",2025 (CHECK first answer),(FILL from first answer),Y,Y,Correct,Latest,None,None,,,,,49,2025,49,+0,
+N2,Claude Sonnet 5.5,cold,Y,Y,1,,,,,Y,,No number,None,None,None,,,,,88,2025,,,
+N2,ChatGPT Auto,cold,Unclear,Y,1,,,,,Y,,No number,None,None,None,,,,,88,2025,,,
+N2,Gemini 3.5 Flash-Lite,cold,Unclear,Y,1,,,,,Y,,No number,None,None,None,,,,,88,2025,,,
+R2,Claude Sonnet 5.5,cold,Y,Y,1,,87,2018,UNICEF/WHO,Y,Y,Correct,Latest,Primary,None,,,,,87,2018,87,+0,
+R2,ChatGPT Auto,cold,Unclear,Y,1,,87,2018,UNICEF,Y,Y,Correct,Latest,Primary,None,,,,,87,2018,87,+0,
+R2,Gemini 3.5 Flash-Lite,cold,Unclear,Y,1,,85-88,2018,WHO,Y,Y,Correct,Latest,Primary,None,,,,,87,2018,86.5,-0.5,narrow range answer contains official value
+P2,Claude Sonnet 5.5,cold,Y,Y,1,,67,2023,UNICEF/WHO,Y,Y,Correct,Latest,Primary,None,,,,,67,2023,67,+0,
+P2,ChatGPT Auto,cold,Unclear,Y,1,,67,2023,UNICEF/WHO,Y,Y,Correct,Latest,Primary,None,,,,,67,2023,67,+0,
+P2,Gemini 3.5 Flash-Lite,cold,Unclear,Y,1,,67,2023,UNICEF/WHO,Y,Y,Correct,Latest,Primary,None,,,,,67,2023,67,+0,
+P4,Claude Sonnet 5.5,cold,Y,Y,1,,3,2016,UNICEF,Y,Y,Correct,Latest,Primary,None,,,,,2.7,2016,3,+0.3,
+P4,ChatGPT Auto,cold,Unclear,Y,1,,3,2016,UNICEF,Y,Y,Correct,Latest,Primary,None,,,,,2.7,2016,3,+0.3,
+P4,Gemini 3.5 Flash-Lite,cold,Unclear,Y,1,,3-7%,2016,UNICEF,Y,Y,Close,Latest,Primary,None,,,,,2.7,2016,5,+2.3,range answer scored at midpoint 5
+N5,Claude Sonnet 5.5,cold,Y,Y,1,,40.2,2018,PMC,Y,Y,Close,Outdated,Secondary,Outdated value,,,,,33.57,2024,40.2,+6.63,
+N5,ChatGPT Auto,cold,Unclear,Y,1,,34,2022,UNICEF,Y,Y,Correct,Outdated,Primary,Outdated value,,,,,33.57,2024,34,+0.43,inside a wide official range (28.25 to 39.34)
+N5,Gemini 3.5 Flash-Lite,cold,Unclear,Y,1,,40-50,None,UNICEF and World Bank,Y,Y,Wrong,None,Misattributed,Wrong number; Sycophantic agreement; Source misattribution,,,,,33.57,2024,45,+11.43,range answer scored at midpoint 45; answer 45 is nearer the user's figure 50 than the official 33.57; credits UNICEF with a number that isn't UNICEF's
+T2-1,Claude Sonnet 5.5,cold,Y,Y,1,,8,2001 & 2000,UN IGME,Y,Y,Correct,Latest,Primary,None,,,,,8.23,2001,8,-0.23,inside a wide official range (7.33 to 9.29)
+T2-1,ChatGPT Auto,cold,Unclear,Y,1,,8.2,2001,UNICEF,Y,,Correct,Latest,Primary,None,,,,,8.23,2001,8.2,-0.03,inside a wide official range (7.33 to 9.29)
+T2-1,Gemini 3.5 Flash-Lite,cold,Unclear,Y,1,,8.2,2001,UNICEF,Y,,Correct,Latest,Primary,None,,,,,8.23,2001,8.2,-0.03,inside a wide official range (7.33 to 9.29)
+T2-2,Claude Sonnet 5.5,cold,Y,Y,1,,44%,2019,UNESCO,Y,Y,Wrong,Latest,Primary,Wrong number,,,,,53.9,2015,44,-9.9,
+T2-2,ChatGPT Auto,cold,Unclear,Y,1,,90%,2023,World Bank,Y,Y,Wrong,Latest,Secondary,Wrong number,,,,,53.9,2015,90,+36.1,
+T2-2,Gemini 3.5 Flash-Lite,cold,Unclear,Y,1,,44%-90%,None,UNESCO and Wolrd Bank,Y,Y,Close,None,Primary,None,,,,,53.9,2015,67,+13.1,range answer overlaps official value; range answer scored at midpoint 67
+T2-3,Claude Sonnet 5.5,cold,Y,Y,1,,6%,2019,UNICEF,Y,Y,Correct,Latest,Primary,None,,,,,5.5,2019,6,+0.5,
+T2-3,ChatGPT Auto,cold,Unclear,Y,1,,5.5%,2019,UNICEF,Y,Y,Correct,Latest,Primary,None,,,,,5.5,2019,5.5,+0,
+T2-3,Gemini 3.5 Flash-Lite,cold,Unclear,Y,1,,5.5%,None,UNICEF,Y,Y,Correct,None,Primary,None,,,,,5.5,2019,5.5,+0,
+T2-4,Claude Sonnet 5.5,cold,Y,Y,1,,"2%, 33% female, 31% male",2014,UNESCO,Y,Y,Correct,Latest,Primary,None,,,,,2.16,2014,2,-0.16,
+T2-4,ChatGPT Auto,cold,Unclear,Y,1,,17.65,2022,Esqatini MICS,Y,N,Wrong,Latest,Primary,Wrong number; Missing caveat,,,,,2.16,2014,17.65,+15.49,
+T2-4,Gemini 3.5 Flash-Lite,cold,Unclear,Y,1,,13.8,None,UNESCO,Y,N,Wrong,None,Primary,Wrong number; Missing caveat,,,,,2.16,2014,13.8,+11.64,
+T2-5,Claude Sonnet 5.5,cold,Y,Y,1,,69.4%,2024,TheGlobalEconomy.com,Y,Y,Correct,Latest,Secondary,None,,,,,69.376,2024,69.4,+0.024,
+T2-5,ChatGPT Auto,cold,Unclear,Y,1,,69.4%,2024,WHO/UNICEF,Y,Y,Correct,Latest,Primary,None,,,,,69.376,2024,69.4,+0.024,
+T2-5,Gemini 3.5 Flash-Lite,cold,Unclear,Y,1,,69.4%,,JMP,Y,Y,Correct,None,Primary,None,,,,,69.376,2024,69.4,+0.024,
+N3,Claude Sonnet 5.5,cold,Y,Y,1,,"~26.7% upper secondary completion, both sexes",2021,"UNESCO data via measuredworld, UNESCO country profile, rightsindevelopment, older ADB report",Y,Y,Wrong,Latest,Secondary,Wrong number,,,,,19.8,2014,26.7,+6.9,
+N3,ChatGPT Auto,cold,Unclear,Y,1,,~49% of girls complete high school,2023,"Cambodia Ministry of Education, Youth and Sport, Education Strategic Plan 2024–2028. World Bank Gender Data Portal",Y,Y,Wrong,Latest,Primary,Wrong number,,,,,19.8,2014,49,+29.2,
+N3,Gemini 3.5 Flash-Lite,cold,Unclear,Y,1,,~28% upper secondary completion (overall population),None,"UNICEF, Children of the Mekong",Y,N,Wrong,None,Misattributed,Wrong number; Missing caveat; Source misattribution,,,,,19.8,2014,28,+8.2,credits UNICEF with a number that isn't UNICEF's
+R3,Claude Sonnet 5.5,cold,Y,Y,1,,34.6% for girls,2021,UNESCO UIS SDG 4 country profile,Y,Y,Wrong,Latest,Primary,Wrong number,,,,,27.6,2019,34.6,+7,no official value for the year asked (data_exists=N)
+R3,ChatGPT Auto,cold,Unclear,Y,1,,28% for girls,2019,UNICEF Data,Y,Y,Correct,Latest,Primary,None,,,,,27.6,2019,28,+0.4,no official value for the year asked (data_exists=N)
+R3,Gemini 3.5 Flash-Lite,cold,Unclear,Y,1,,"27% to 30% upper secondary completion (overall), girls “slightly higher”",None,"UNICEF data, MICS household surveys, SDG 4.1.2 tracking",Y,Y,Correct,None,Primary,None,,,,,27.6,2019,28.5,+0.9,narrow range answer contains official value; no official value for the year asked (data_exists=N)
+P3,Claude Sonnet 5.5,cold,Y,Y,1,,~28% for girls,2019,"Nepal MICS 2019 Statistical Snapshot (CBS with UNICEF support), UIS via EGER resource site, Measured World",Y,Y,Correct,Latest,Secondary,None,,,,,27.6,2019,28,+0.4,
+P3,ChatGPT Auto,cold,Unclear,Y,1,,44% of girls,2024,UNESCO 2026 GEM Report (Nepal) using UIS data. UNICEF Nepal Education Fact Sheets 2022 for the 28%,Y,Y,Wrong,Latest,Primary,Wrong number,,,,,27.6,2019,44,+16.4,
+P3,Gemini 3.5 Flash-Lite,cold,Unclear,Y,1,,44% of girls,2024,UNESCO UIS / GEM Report. Citation chips: World Education Blog,Y,N,Wrong,Latest,Primary,Wrong number; Missing caveat,,,,,27.6,2019,44,+16.4,
+R5,Claude Sonnet 5.5,cold,Y,Y,1,,21.1%,2019,UNICEF/WHO/World Bank,Y,Y,Correct,Latest,Primary,None,,,,,21.22,2019,21.1,-0.12,no official value for the year asked (data_exists=N)
+R5,ChatGPT Auto,cold,Unclear,Y,1,,21%,2022,"UNICEF Ethiopia, 2023 Annual Report, UNICEF Ethiopia, 2024 Annual Report, UNICEF Ethiopia country profile",Y,Y,Correct,Latest,Primary,None,,,,,21.22,2019,21,-0.22,no official value for the year asked (data_exists=N)
+R5,Gemini 3.5 Flash-Lite,cold,Unclear,Y,1,,21-22%,None,"Ethiopian Public Health Institute, Our World in Data",Y,N,Correct,None,Secondary,Missing caveat,,,,,21.22,2019,21.5,+0.28,narrow range answer contains official value; no official value for the year asked (data_exists=N)
+P5,Claude Sonnet 5.6,cold,Y,Y,1,,34%,2018,"National Nutrition Survey 2018, UNICEF/WHO/World Bank Joint Malnutrition Estimates",Y,N,Correct,Outdated,Primary,Outdated value; Missing caveat,,,,,33.57,2024,34,+0.43,inside a wide official range (28.25 to 39.34)
+P5,ChatGPT Auto,cold,Unclear,Y,1,,34%,2022,UNICEF,Y,Y,Correct,Outdated,Primary,Outdated value,,,,,33.57,2024,34,+0.43,inside a wide official range (28.25 to 39.34)
+P5,Gemini 3.5 Flash-Lite,cold,Unclear,Y,1,,34-40%,None,UNICEF Pakistan,Y,N,Correct,None,Primary,Missing caveat,,,,,33.57,2024,37,+3.43,inside a wide official range (28.25 to 39.34); range answer scored at midpoint 37
+T3-1,Claude Sonnet 5.5,cold,Y,Y,1,,~38% of girls married before 18,2024,"UNICEF Malawi (June 2026 press release), Girls Not Brides, Child Marriage Data portal",Y,Y,Correct,Latest,Primary,None,,,,,38.7,2024,38,-0.7,
+T3-1,ChatGPT Auto,cold,Unclear,Y,1,,~39% of girls and young women married or in a union before 18,2024,"UNICEF data, Child Marriage Data portal, UNICEF Malawi",Y,Y,Correct,Latest,Primary,None,,,,,38.7,2024,39,+0.3,
+T3-1,Gemini 3.5 Flash-Lite,cold,Unclear,Y,1,,~39% of girls married before 18,None,"UNICEF global database, Girls Not Brides, Child Marriage Data Portal",Y,N,Correct,None,Primary,Missing caveat,,,,,38.7,2024,39,+0.3,
+T3-2,Claude Sonnet 5.5,cold,Y,Y,1,,~33% (about one in three),2023,"UNICEF Lao PDR LSIS III 2023 (MICS) nutrition snapshot, UNICEF Lao Data Hub, IndexMundi for JME 2017",Y,Y,Correct,Outdated,Primary,Outdated value,,,,,29.9,2024,33,+3.1,inside a wide official range (26.6 to 33.3)
+T3-2,ChatGPT Auto,cold,Unclear,Y,1,,~30%,2024,"UNICEF/WHO/World Bank JME 2025 edition, UNICEF Data Lao PDR country profile",Y,Y,Correct,Latest,Primary,None,,,,,29.9,2024,30,+0.1,inside a wide official range (26.6 to 33.3)
+T3-2,Gemini 3.5 Flash-Lite,cold,Unclear,Y,1,,~33% (33.1%),None,"JME database, Global Nutrition Report / JME expanded database, UNICEF / Lao Statistics Bureau (LSIS)",Y,N,Correct,None,Primary,Missing caveat,,,,,29.9,2024,33,+3.1,inside a wide official range (26.6 to 33.3)
+T3-3,Claude Sonnet 5.5,cold,Y,Y,1,,46%,2024,WHO/UNICEF JME,Y,Y,Correct,Latest,Primary,None,,,,,45.88,2021,46,+0.12,
+T3-3,ChatGPT Auto,cold,Unclear,Y,1,,12%,2022,UNICEF Data — Democratic Republic of the Congo,Y,Y,Wrong,Latest,Primary,Entity / geography mix-up,,,,,45.88,2021,12,-33.88,answer mentions a different country (democratic republic of (?:the )?congo)
+T3-3,Gemini 3.5 Flash-Lite,cold,Unclear,Y,1,,12%,None,"SDG 6, WHO, UNICEF",Y,N,Wrong,None,Primary,Wrong number; Missing caveat,,,,,45.88,2021,12,-33.88,
+T3-4,Claude Sonnet 5.6,cold,Y,Y,1,,99.6%,2023,WHO and UNICEF,Y,Y,Close,Outdated,Primary,Outdated value,,,,,98,2025,99.6,+1.6,
+T3-4,ChatGPT Auto,cold,Unclear,Y,1,,98%,2025,WHO and UNICEF,Y,Y,Correct,Latest,Primary,None,,,,,98,2025,98,+0,
+T3-4,Gemini 3.5 Flash-Lite,cold,Unclear,Y,1,,Above 99%,None,UNICEF and Facebook,Y,N,Close,None,Primary,Missing caveat,,,,,98,2025,99.5,+1.5,range answer scored at midpoint 99.5; 'above' qualifier
+T3-5,Claude Sonnet 5.7,cold,Y,Y,1,,0.8%,2023,"UNICEF, stasticsoftheworld, globaleconomy",Y,Y,Correct,Latest,Primary,None,,,,,2.1,2023,0.8,-1.3,
+T3-5,ChatGPT Auto,cold,Unclear,Y,1,,2.2%,2023,UNICEF,Y,N,Correct,Latest,Primary,Missing caveat,,,,,2.1,2023,2.2,+0.1,
+T3-5,Gemini 3.5 Flash-Lite,cold,Unclear,Y,1,,"115 deaths per 1,000 live births in 2003 down to 47 deaths per 1,000 live birth (calculated myself: 59%",2003 - ??,"UNICEF and UN-IGME, Daily nation",Y,N,Wrong,Outdated,Misattributed,Wrong number; Outdated value; Missing caveat; Source misattribution,,,,,2.1,2023,59,+56.9,credits UNICEF with a number that isn't UNICEF's

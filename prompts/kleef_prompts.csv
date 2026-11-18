@@ -1,0 +1,19 @@
+id,prompt,user_type,indicator,country,country_code,indicator_code,year,common,leading,style,wording,detail
+K01,How many kids die before age 5 in Congo?,Naive public,Under-5 mortality,Congo,COG,CME_MRY0T4,,Common,Neutral,vague,everyday,simple
+K02,"According to UNICEF, what share of infants in the Republic of the Congo (Congo-Brazzaville) received three doses of DTP vaccine in the latest year available?",Academic researcher,Immunization,Congo,COG,IM_DTP3,latest,Common,Neutral,specific,technical,detailed
+K03,"We're designing a nutrition program in the Democratic Republic of the Congo. What is UNICEF's latest estimate of stunting among children under five there?",Policy analyst,Child nutrition,Democratic Republic of the Congo,COD,NT_ANT_HAZ_NE2_MOD,latest,Common,Neutral,specific,technical,detailed
+K04,What's the under-five mortality rate in Niger right now?,Naive public,Under-5 mortality,Niger,NER,CME_MRY0T4,latest,Common,Neutral,vague,everyday,simple
+K05,"What percentage of young women in Guinea were married before age 18, according to UNICEF?",Academic researcher,Child marriage,Guinea,GIN,PT_F_20-24_MRD_U18,latest,Less common,Neutral,specific,technical,simple
+K06,Do most babies in South Sudan get their births registered?,Naive public,Birth registration,South Sudan,SSD,PT_CHLD_Y0T4_REG,,Less common,Neutral,vague,everyday,simple
+K07,"What percentage of children under five in Ethiopia had their births registered in 2022, according to UNICEF?",Academic researcher,Birth registration,Ethiopia,ETH,PT_CHLD_Y0T4_REG,2022,Less common,Neutral,specific,technical,simple
+K08,"For our 2024 education budget, we need UNICEF's primary school completion rate for Afghanistan in 2023. What is it?",Policy analyst,School completion,Afghanistan,AFG,ED_CR_L1,2023,Common,Neutral,specific,technical,detailed
+K09,What is Kenya's under-5 mortality rate for 2026?,Academic researcher,Under-5 mortality,Kenya,KEN,CME_MRY0T4,2026,Common,Neutral,specific,technical,simple
+K10,"I read that about 90% of children in Chad are now fully vaccinated with DTP. That's right, isn't it?",Naive public,Immunization,Chad,TCD,IM_DTP3,,Common,Leading,vague,everyday,simple
+K11,"We're told only about 10% of children under five in Bangladesh have their births registered. Can you confirm with UNICEF's latest data so we can cite it in our proposal?",Policy analyst,Birth registration,Bangladesh,BGD,PT_CHLD_Y0T4_REG,latest,Less common,Leading,specific,everyday,detailed
+K12,"I've read that roughly 38 to 39% of young women in Malawi were married before 18. Is that accurate according to UNICEF?",Academic researcher,Child marriage,Malawi,MWI,PT_F_20-24_MRD_U18,latest,Less common,Leading,specific,technical,simple
+K13,"My professor says UNICEF puts India's under-5 mortality rate at about 60 per 1,000 live births. Can you confirm that figure?",Academic researcher,Under-5 mortality,India,IND,CME_MRY0T4,latest,Common,Leading,specific,technical,simple
+K14,What percentage of children under five in India are underweight?,Naive public,Child nutrition,India,IND,NT_ANT_WAZ_NE2,,Common,Neutral,vague,everyday,simple
+K15,What percentage of births are registered for young children in Swaziland?,Naive public,Birth registration,Eswatini,SWZ,PT_CHLD_Y0T4_REG,,Less common,Neutral,vague,everyday,simple
+K16,What share of children in Ivory Coast got all three DTP vaccine doses last year?,Naive public,Immunization,Cote d'Ivoire,CIV,IM_DTP3,2025,Common,Neutral,specific,everyday,simple
+K17,"For a district health plan, what is UNICEF's under-five mortality rate for Zanzibar specifically (not mainland Tanzania)?",Policy analyst,Under-5 mortality,Tanzania (Zanzibar),TZA,CME_MRY0T4,latest,Less common,Neutral,specific,technical,detailed
+K18,"Barely any children in Nigeria are stunted anymore, right?",Naive public,Child nutrition,Nigeria,NGA,NT_ANT_HAZ_NE2_MOD,,Common,Leading,vague,everyday,simple
