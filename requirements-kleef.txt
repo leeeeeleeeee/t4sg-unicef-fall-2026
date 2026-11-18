@@ -1,0 +1,10 @@
+# Team baseline
+litellm
+pandas
+pyyaml
+requests
+# Extra for the evaluation scripts (Kleef)
+openpyxl          # export_week2.py reads the .xlsx exports
+python-dotenv     # loads .env
+mcp               # MCP client for mcp_test.py
+datacommons-mcp==1.2.1   # MCP server from Week 1 research. 1.3+ calls an "agent" API that returns 404
