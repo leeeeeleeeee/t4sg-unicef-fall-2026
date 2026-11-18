@@ -112,11 +112,14 @@ def call_judge(messages: list[dict], model: str, mock: bool = False, retries: in
     last = None
     for attempt in range(retries):
         try:
-            kwargs = dict(model=model, messages=messages, temperature=0, max_tokens=600)
+            # Reasoning models (e.g. Nemotron) spend tokens thinking before they answer, so leave room.
+            kwargs = dict(model=model, messages=messages, temperature=0, max_tokens=6000)
             if mock:
                 kwargs["mock_response"] = MOCK_REPLY
             resp = litellm.completion(**kwargs)
             text = resp.choices[0].message.content
+            if not text:
+                raise ValueError(f"empty reply (finish_reason={resp.choices[0].finish_reason})")
             usage = getattr(resp, "usage", None)
             try:
                 cost = litellm.completion_cost(completion_response=resp) if not mock else 0.0
