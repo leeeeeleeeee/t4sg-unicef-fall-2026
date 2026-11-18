@@ -60,6 +60,24 @@ def test_close_and_wrong_cutoff():
     assert r["number_score"] == "No number"
 
 
+def test_portal_lag():
+    key = {"unicef_value": "95.4", "year": "2016", "unit": "%", "data_exists": "Y"}
+    newer = {"T1-3": [{"id": "T1-3", "value": "97.8", "year": "2024", "range_low": "", "range_high": "",
+                       "source": "Belize MICS7 2024", "status": "verified"}]}
+    a = "Belize's primary completion rate is 97.8% (MICS7 2024, Statistical Institute of Belize with UNICEF)."
+    r = score_row(row(a, id="T1-3"), {}, key, newer)
+    assert r["number_score"] == "Portal lag" and "Wrong number" not in r["error_types"], r
+    # same answer, no verified newer figure on file -> Close, plus a note to check it
+    r = score_row(row(a, id="T1-3"), {}, key, {})
+    assert r["number_score"] == "Close" and "possible portal lag" in r["score_notes"], r
+    # a figure that matches neither the key nor the newer figure stays Wrong
+    r = score_row(row("Belize's primary completion rate is 80% (MICS7 2024).", id="T1-3"), {}, key, newer)
+    assert r["number_score"] == "Wrong", r
+    # newer figure must actually be newer than the key
+    old = {"T1-3": [dict(newer["T1-3"][0], year="2015")]}
+    assert score_row(row(a, id="T1-3"), {}, key, old)["number_score"] == "Close"
+
+
 def test_source_read_from_answer_when_blank():
     a = "According to United Nations/SDG data (UN Statistics Division, UN IGME estimates), it was 107.2 per 1,000 in 2022."
     r = score_row(row(a), {}, U5)

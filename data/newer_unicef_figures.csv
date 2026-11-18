@@ -1,0 +1,3 @@
+id,value,year,range_low,range_high,unit,source,link,status,checked_on,note
+T1-3,97.8,2024,,,%,"Belize MICS7 2024 (Statistical Institute of Belize with UNICEF support), Education Statistical Snapshot",https://sib.org.bz/wp-content/uploads/12_MICS_StatisticalSnapshot_Education.pdf,verified,2026-11-18,"Primary completion rate. UNICEF's data portal (and our answer key) still has MICS 2015-16 = 95.4%"
+N4,21,2025,,,%,"Ethiopia DHS 2024-25 summary report (Ethiopian Statistical Service)",https://www.ess.gov.et,unverified,2026-11-18,"Not counted: DHS, not a UNICEF figure, and 21% is children WITH a birth certificate, not births registered. Re-check when UNICEF publishes it"
