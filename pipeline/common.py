@@ -104,3 +104,28 @@ def load_dotenv_if_present() -> None:
         load_dotenv(find_dotenv(usecwd=True))
     except ImportError:
         pass
+
+
+# ---- Names used by report.py and checks.py (Bianca) -------------------------
+from pathlib import Path  # noqa: E402
+
+REPO_ROOT = Path(ROOT)
+RESULT_COLUMNS = RESULTS_COLUMNS
+
+_CANONICAL_SCORES = {s.lower(): s for s in NUMBER_SCORES + YEAR_SCORES + SOURCE_SCORES}
+
+
+def clean_score(value) -> str:
+    """Normalize a score cell ('correct ', 'NO NUMBER') to its canonical label; '' if blank."""
+    v = str(value or "").strip()
+    return _CANONICAL_SCORES.get(v.lower(), v)
+
+
+def to_bool(value):
+    """'Y'/'yes'/'true'/'1' -> True, 'N'/'no'/'false'/'0' -> False, anything else (e.g. 'Unclear') -> None."""
+    v = str(value or "").strip().lower()
+    if v in {"y", "yes", "true", "1", "on"}:
+        return True
+    if v in {"n", "no", "false", "0", "off"}:
+        return False
+    return None
