@@ -286,7 +286,8 @@ def score_year(year: int | None, key: dict) -> str:
 
 
 PRIMARY = [
-    r"unicef", r"\bun[\s_-]?igme\b", r"inter-?agency group", r"\bwho\b", r"world health organi[sz]ation",
+    r"unicef", r"\bun[\s_-]?igme\b", r"inter-?agency group", r"(?-i:\bWHO\b)", r"world health organi[sz]ation",
+    r"united nations", r"\bun statistics division\b", r"\bunsd\b", r"\bsdg (?:global )?data(?:base)?\b",
     r"wuenic", r"\bjme\b", r"joint (?:child )?malnutrition", r"\bjmp\b", r"joint monitoring",
     r"\bdhs\b", r"\bedhs\b", r"\bidhs\b", r"\bemdhs\b", r"demographic and health survey", r"\bmics\d?\b",
     r"multiple indicator cluster", r"\blsis\b", r"susenas", r"national statistic", r"statistic(?:al|s) (?:office|institute|service|bureau)",
@@ -303,6 +304,20 @@ SECONDARY = [
     r"open development", r"\bunhcr\b", r"capital (?:ethiopia|newspaper)", r"public health institute",
     r"\bgem report\b", r"world education blog", r"tbsnews", r"\.com\b",
 ]
+def extract_sources(answer: str) -> str:
+    """Source names an answer mentions, in order of appearance (for runs where source_claimed is blank)."""
+    found = []
+    for pat in PRIMARY + SECONDARY:
+        for m in re.finditer(pat, answer, re.I):
+            found.append((m.start(), m.group(0).strip()))
+    seen, out = set(), []
+    for _, name in sorted(found):
+        if name.lower() not in seen:
+            seen.add(name.lower())
+            out.append(name)
+    return "; ".join(out)
+
+
 NO_SOURCE = re.compile(r"^\s*(?:none\b.*|n/?a|no source.*|\(fill.*|)\s*$", re.I)
 
 
@@ -313,8 +328,8 @@ def score_source(source: str, number_score: str, flags: set[str], answer: str = 
     if NO_SOURCE.match(s):
         return "None", notes
     low = s.lower()
-    has_p = any(re.search(p, low) for p in PRIMARY)
-    has_s = any(re.search(p, low) for p in SECONDARY)
+    has_p = any(re.search(p, s, re.I) for p in PRIMARY)
+    has_s = any(re.search(p, s, re.I) for p in SECONDARY)
     via_secondary = re.search(r"\bvia\b", low) and has_s
     first_source = re.split(r"[,;/]| and |\. ", low, maxsplit=1)[0]
     claims_unicef = "unicef" in first_source or re.search(
@@ -453,6 +468,9 @@ def score_row(row: dict, prompt: dict, key: dict) -> dict:
         notes.append("id not in answer key")
     number_score, value, diff, n_notes = score_number(ans, key) if key else ("", ans.mid if ans else None, None, [])
     notes += n_notes
+
+    if not (row.get("source_claimed") or "").strip() and answer:
+        row["source_claimed"] = extract_sources(answer)
 
     year_text = (row.get("year_given") or "").strip()
     if year_text:

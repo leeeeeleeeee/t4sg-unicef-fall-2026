@@ -60,6 +60,18 @@ def test_close_and_wrong_cutoff():
     assert r["number_score"] == "No number"
 
 
+def test_source_read_from_answer_when_blank():
+    a = "According to United Nations/SDG data (UN Statistics Division, UN IGME estimates), it was 107.2 per 1,000 in 2022."
+    r = score_row(row(a), {}, U5)
+    assert "IGME" in r["source_claimed"] and r["source_score"] == "Primary", r
+    r = score_row(row("Our World in Data puts it at 107 per 1,000 (2022)."), {}, U5)
+    assert r["source_score"] == "Secondary", r
+    assert score_row(row("It is about 107 per 1,000."), {}, U5)["source_score"] == "None"
+    # the pronoun "who" is not the World Health Organization
+    assert score_row(row("Children who die before 5: about 107 per 1,000."), {}, U5)["source_score"] == "None"
+    assert "WHO" in score_row(row("WHO estimates 107 per 1,000 (2022)."), {}, U5)["source_claimed"]
+
+
 def test_ages_are_not_headline_numbers():
     # real MCP-test answer: the '5' in 'under-5' was read as the figure
     a = ("According to available data in Data Commons, the specific UNICEF under-5 mortality rate for Rwanda in "

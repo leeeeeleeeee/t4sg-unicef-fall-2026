@@ -10,9 +10,9 @@ matches Lily's (`pipeline/`, `prompts/`, `data/`, `results/`, `config/`) plus `d
 | Export Week 2 Results + Answer Key into the shared columns | **Done** | `data/test_set/` (made by `pipeline/export_week2.py`) |
 | Post the "Close" cutoff | **Ready to post** (text at the top of the doc) | `docs/scoring_rules.md` |
 | `scorer.py` | **Done.** Matches hand scores on **73/87** rows (target 20); all 103 disagreements explained | `pipeline/scorer.py`, `reports/scorer_validation.md` |
-| AI judge (rubric + free model + agreement on 30 rows) | **Built and tested with a fake model.** Needs a Gemini/OpenRouter key for the real run, and you should confirm the 30 labels | `config/judge_rubric.md`, `pipeline/judge.py`, `data/test_set/judge_labels.csv` |
+| AI judge (rubric + free model + agreement on 30 rows) | **Run (Nemotron, free).** Agreement: sycophancy 77% (kappa 0.61), narrative distortion 73% (0.37), pattern answer 87%. The 30 labels are still drafts to confirm | `config/judge_rubric.md`, `pipeline/judge.py`, `reports/judge_agreement.md` |
 | `prompts/kleef_prompts.csv` (optional) | **Done.** 18 edge-case prompts, all checked against UNICEF's API | `prompts/kleef_prompts.csv`, `data/test_set/kleef_prompts_notes.csv` |
-| `mcp_test.py` (10 prompts, with vs without MCP) | **Built.** MCP server and tool loop tested; needs `DC_API_KEY` + a Gemini key for the real run | `pipeline/mcp_test.py`, `tests/test_mcp_loop.py` |
+| `mcp_test.py` (10 prompts, with vs without MCP) | **Run.** Correct 4/10 without MCP vs 8/10 with it; called the tool and used its number 10/10 | `pipeline/mcp_test.py`, `reports/mcp_test_summary.md`, `results/mcp_test/` |
 
 ## Big finding: the Week 2 answer key had errors
 
@@ -125,7 +125,28 @@ Match these to whatever Shravya puts in `config/connectors.yaml`.
   "agent" API that returns 404 for our keys. 1.2.1 has the two tools from our Week 1 summary
   (`search_indicators`, `get_observations`) and works. If a later server version offers "playbook" resources,
   `mcp_test.py` adds a small `read_mcp_resource` bridge tool automatically.
-* **First MCP results (5 prompts, Gemini 3.5 Flash-Lite):** the model called the tools on 5/5 prompts and
-  used the tool's number each time. But Data Commons' newest under-5 mortality and DTP3 values are from **2022**,
-  from an older estimate round (Nigeria 107.2 vs UNICEF's 115.6; Chad DTP3 60%), so MCP answers can be
-  "grounded" and still behind UNICEF. That's the `lag_flag` problem in action.
+* **AI judge results (Nemotron Ultra, free; `reports/judge_agreement.md`):**
+  * **Sycophancy:** agrees on 77% (kappa 0.61, "substantial"), but caught only 1 of the 5 hand "Y"s. It misses the
+    subtle kind ("gave the right number, then piled on figures that support the user"). It also treats a
+    false-year premise ("in 2021", when no 2021 data exists) as "no premise", though the rubric counts it.
+  * **Narrative distortion:** catches all 4 hand "Y"s but over-flags (12 Y vs 4). It mostly mislabels
+    misattribution and wrong-country answers as distortion.
+  * **Pattern answer:** we had no hand examples, and it flagged 4.
+  * Caveat: the judge only saw the tester's summary of each Week 2 answer, not the full text. Possible next
+    step (your call): tighten the rubric so source and country errors aren't narrative distortion, and so a
+    false year in the question counts as a premise.
+* **MCP test results (10 prompts, Gemini 3.5 Flash-Lite, 17 Nov 2026):** see `reports/mcp_test_summary.md`.
+
+  | | without MCP | with Data Commons MCP |
+  |---|---|---|
+  | Correct | 4/10 | **8/10** |
+  | Primary source | 5/10 | **9/10** |
+  | Credited UNICEF with a wrong number | 4/10 | 1/10 |
+  | Fell for the leading question (N5, T2-3) | 2/2 | 0/2 |
+  | Called a tool / used its number | n/a | 10/10 / 10/10 |
+  | Avg seconds per answer | 1.1 | 11.7 |
+
+  The catch: Data Commons' newest values are often from **2022**, from an older estimate round (Nigeria
+  under-5 mortality 107.2 vs UNICEF's 115.6; Chad DTP3 60% vs 67% for 2023). So MCP answers are grounded
+  but can lag behind UNICEF ("Latest year": 3/10 with MCP vs 4/10 without). That's the `lag_flag` problem in action.
+  The listed cost is at Google's list price; on the free tier we paid nothing.
