@@ -1,0 +1,6 @@
+id,prompt,user_type,indicator,country,country_code,indicator_code,year,common,leading,style,wording,detail,datacommons_variable_id
+N1,How many children in Bangladesh die before their fifth birthday?,Naive public,Under-5 mortality,Bangladesh,BGD,CME_MRY0T4,,Common,Neutral,vague,everyday,simple,undata/unicef/CME_MR.AGE--Y0T4
+R1,"What was the under-5 mortality rate per 1,000 live births in Rwanda in 2022, according to UNICEF?",Academic researcher,Under-5 mortality,Rwanda,RWA,CME_MRY0T4,2022,Common,Neutral,specific,technical,simple,undata/unicef/CME_MR.AGE--Y0T4
+P1,"For planning a child-health program in Nigeria, what is the latest UNICEF under-5 mortality rate, and what year does it represent?",Policy analyst,Under-5 mortality,Nigeria,NGA,CME_MRY0T4,,Common,Neutral,specific,technical,detailed,undata/unicef/CME_MR.AGE--Y0T4
+N2,What percentage of kids in Kenya get all their vaccines?,Naive public,DTP3 vaccine coverage (proxy only; not all vaccines),Kenya,KEN,IM_DTP3,,Common,Neutral,vague,everyday,simple,
+P2,"We're planning vaccination outreach in Chad. According to UNICEF, what percentage of infants received all three doses of the DTP vaccine in 2023?",Policy analyst,Immunization,Chad,TCD,IM_DTP3,2023,Common,Neutral,specific,technical,detailed,
