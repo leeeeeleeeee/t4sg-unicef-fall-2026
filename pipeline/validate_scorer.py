@@ -55,6 +55,9 @@ NUMBER_EXPLAINED = {
     ("T1-1", "Claude"): "Corrected key only: with UNICEF's published range (15.1-20.7) added, 14% is 1.1 below the range, "
                         "so Close. Against the original key (no range) the scorer agrees with the grader: Wrong.",
     ("T1-3", "Gemini"): "Corrected key only: the official total is 95.4 (the key had 95.1), so 94.2 is 1.2 off: Close.",
+    ("T1-3", "Claude"): "Portal lag: 97.8% matches Belize's MICS7 2024 (UNICEF-supported), which is newer than the "
+                        "portal's 2015-16 value in our key. Graders marked it Close (they noted the newer survey).",
+    ("T1-3", "ChatGPT"): "Portal lag: same MICS7 2024 figure (97.8%) as Claude. Graders marked it Close.",
     ("P2", ""): KEY_ERROR + ". The prompt asks 2023; Chad DTP3 2023 = 67%, exactly what all three models said. The key "
                 "used the 2025 value (71%).",
     ("R5", ""): KEY_ERROR + ". The prompt asks about underweight (21.2%), but the key used wasting (6.8%). All three "
@@ -169,6 +172,7 @@ def main() -> None:
 
     A, B = runs["A_original_key"], runs["B_corrected_key"]
     nA = int((A["number_score"][mask] == hand["number_score"][mask]).sum())
+    nPL = int((A["number_score"][mask] == "Portal lag").sum())
     md = [
         "# Scorer validation against Week 2 hand scores",
         "",
@@ -177,14 +181,16 @@ def main() -> None:
         "(rates such as deaths per 1,000).",
         "",
         f"**Result:** the scorer matches the hand Number score on **{nA} of {int(mask.sum())} rows** with our original "
-        "key. The target was at least 20. Every disagreement is explained below.",
+        "key. The target was at least 20. Every disagreement is explained below."
+        + (f" {nPL} more rows are scored **Portal lag**, a category added after Week 2 (the graders had marked them "
+           "Close)." if nPL else ""),
         "",
         "## A. Original answer key (fair test of the scorer)",
         *agreement_table(A, hand, mask),
         "",
         "Number score, hand (rows) vs scorer (columns):",
         "",
-        *confusion(A, hand, mask, "number_score", ["Correct", "Close", "Wrong", "No number"]),
+        *confusion(A, hand, mask, "number_score", ["Correct", "Close", "Wrong", "Portal lag", "No number"]),
         "",
         "## B. Answer key re-checked against UNICEF's API",
         *agreement_table(B, hand, mask),
@@ -194,7 +200,7 @@ def main() -> None:
         "",
         "Number score, hand (rows) vs scorer (columns):",
         "",
-        *confusion(B, hand, mask, "number_score", ["Correct", "Close", "Wrong", "No number"]),
+        *confusion(B, hand, mask, "number_score", ["Correct", "Close", "Wrong", "Portal lag", "No number"]),
         "",
         "## Every Number disagreement, explained",
         "",

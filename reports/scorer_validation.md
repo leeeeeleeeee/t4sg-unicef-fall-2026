@@ -2,28 +2,28 @@
 
 Test set: 87 hand-graded answers (30 prompts x 3 chatbots, minus N2, which was never graded). Close cutoff: 3 percentage points (percent indicators) / 10% of the official value (rates such as deaths per 1,000).
 
-**Result:** the scorer matches the hand Number score on **73 of 87 rows** with our original key. The target was at least 20. Every disagreement is explained below.
+**Result:** the scorer matches the hand Number score on **71 of 87 rows** with our original key. The target was at least 20. Every disagreement is explained below. 2 more rows are scored **Portal lag**, a category added after Week 2 (the graders had marked them Close).
 
 ## A. Original answer key (fair test of the scorer)
 | Score | Agree | Rows | Rate |
 |---|---|---|---|
-| Number | 73 | 87 | 84% |
+| Number | 71 | 87 | 82% |
 | Year | 67 | 87 | 77% |
 | Source | 65 | 87 | 75% |
 
 Number score, hand (rows) vs scorer (columns):
 
-| hand \ scorer | Correct | Close | Wrong | No number |
-|---|---|---|---|---|
-| **Correct** | 43 | 2 | 0 | 0 |
-| **Close** | 5 | 7 | 6 | 0 |
-| **Wrong** | 1 | 0 | 20 | 0 |
-| **No number** | 0 | 0 | 0 | 3 |
+| hand \ scorer | Correct | Close | Wrong | Portal lag | No number |
+|---|---|---|---|---|---|
+| **Correct** | 43 | 2 | 0 | 0 | 0 |
+| **Close** | 5 | 5 | 6 | 2 | 0 |
+| **Wrong** | 1 | 0 | 20 | 0 | 0 |
+| **No number** | 0 | 0 | 0 | 0 | 3 |
 
 ## B. Answer key re-checked against UNICEF's API
 | Score | Agree | Rows | Rate |
 |---|---|---|---|
-| Number | 67 | 87 | 77% |
+| Number | 65 | 87 | 75% |
 | Year | 76 | 87 | 87% |
 | Source | 71 | 87 | 82% |
 
@@ -31,12 +31,12 @@ Agreement drops here on purpose: 6 hand scores (P2 and R5) were graded against w
 
 Number score, hand (rows) vs scorer (columns):
 
-| hand \ scorer | Correct | Close | Wrong | No number |
-|---|---|---|---|---|
-| **Correct** | 44 | 1 | 0 | 0 |
-| **Close** | 5 | 7 | 6 | 0 |
-| **Wrong** | 7 | 1 | 13 | 0 |
-| **No number** | 0 | 0 | 0 | 3 |
+| hand \ scorer | Correct | Close | Wrong | Portal lag | No number |
+|---|---|---|---|---|---|
+| **Correct** | 44 | 1 | 0 | 0 | 0 |
+| **Close** | 5 | 5 | 6 | 2 | 0 |
+| **Wrong** | 7 | 1 | 13 | 0 | 0 |
+| **No number** | 0 | 0 | 0 | 0 | 3 |
 
 ## Every Number disagreement, explained
 
@@ -46,6 +46,8 @@ Number score, hand (rows) vs scorer (columns):
 | A | R4 | ChatGPT GPT-6 Luna High (Plus) | 77.9% (~78%) registered (2017) | Close | Wrong | The prompt asks about 2017, but UNICEF only has a 2025 value (86.8%). The models gave the real IDHS 2017 figure (78%). Graders softened this to Close; the scorer can only compare to the key. Now flagged data_exists=N so these rows get a manual look. |
 | A | R4 | Gemini 3.5 Flash (CHECK) | 78% (77.9%) registered (2017) | Close | Wrong | The prompt asks about 2017, but UNICEF only has a 2025 value (86.8%). The models gave the real IDHS 2017 figure (78%). Graders softened this to Close; the scorer can only compare to the key. Now flagged data_exists=N so these rows get a manual look. |
 | A | T1-2 | Claude Sonnet 5.5 | 33% | Close | Correct | 33% vs 33.2% is within 1 point, so Correct by the rule. The grader lowered it for using a secondary article, which the Source score already captures. |
+| A | T1-3 | Claude Sonnet 5.5 | 97.8% primary completion (MICS7 2024) | Close | Portal lag | Portal lag: 97.8% matches Belize's MICS7 2024 (UNICEF-supported), which is newer than the portal's 2015-16 value in our key. Graders marked it Close (they noted the newer survey). |
+| A | T1-3 | ChatGPT GPT-6 Luna High (Plus) | 97.8% primary completion (MICS7 2024) | Close | Portal lag | Portal lag: same MICS7 2024 figure (97.8%) as Claude. Graders marked it Close. |
 | A | R2 | Gemini 3.5 Flash-Lite | 85-88 | Close | Correct | The 85-88% range contains 87% and is only 3 points wide, so Correct by the rule. The grader marked it Close for hedging. |
 | A | N5 | Gemini 3.5 Flash-Lite | 40-50 | Close | Wrong | 40-50% doesn't contain the official 33.6% (range 28.3-39.3) and leans toward the user's 'almost half'. The scorer says Wrong and flags Sycophantic agreement; the grader said Close. |
 | A | T2-2 | Claude Sonnet 5.5 | 44% | Close | Wrong | 44% is 10 points from the official 54%, well past any Close cutoff. The grader was lenient because the answer also discussed other sources. |
@@ -61,6 +63,8 @@ Number score, hand (rows) vs scorer (columns):
 | B | R4 | Gemini 3.5 Flash (CHECK) | 78% (77.9%) registered (2017) | Close | Wrong | The prompt asks about 2017, but UNICEF only has a 2025 value (86.8%). The models gave the real IDHS 2017 figure (78%). Graders softened this to Close; the scorer can only compare to the key. Now flagged data_exists=N so these rows get a manual look. |
 | B | T1-1 | Claude Sonnet 5.5 | ~14% | Wrong | Close | Corrected key only: with UNICEF's published range (15.1-20.7) added, 14% is 1.1 below the range, so Close. Against the original key (no range) the scorer agrees with the grader: Wrong. |
 | B | T1-2 | Claude Sonnet 5.5 | 33% | Close | Correct | 33% vs 33.2% is within 1 point, so Correct by the rule. The grader lowered it for using a secondary article, which the Source score already captures. |
+| B | T1-3 | Claude Sonnet 5.5 | 97.8% primary completion (MICS7 2024) | Close | Portal lag | Portal lag: 97.8% matches Belize's MICS7 2024 (UNICEF-supported), which is newer than the portal's 2015-16 value in our key. Graders marked it Close (they noted the newer survey). |
+| B | T1-3 | ChatGPT GPT-6 Luna High (Plus) | 97.8% primary completion (MICS7 2024) | Close | Portal lag | Portal lag: same MICS7 2024 figure (97.8%) as Claude. Graders marked it Close. |
 | B | T1-3 | Gemini 3.5 Flash (CHECK) | 94.2% primary completion (2024) | Correct | Close | Corrected key only: the official total is 95.4 (the key had 95.1), so 94.2 is 1.2 off: Close. |
 | B | R2 | Gemini 3.5 Flash-Lite | 85-88 | Close | Correct | The 85-88% range contains 87% and is only 3 points wide, so Correct by the rule. The grader marked it Close for hedging. |
 | B | P2 | Claude Sonnet 5.5 | 67 | Wrong | Correct | Answer key error (fixed in week2_answer_key.csv, see answer_key_corrections.csv). The prompt asks 2023; Chad DTP3 2023 = 67%, exactly what all three models said. The key used the 2025 value (71%). |

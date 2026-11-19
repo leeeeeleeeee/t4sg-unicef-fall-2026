@@ -67,7 +67,7 @@ Return **only** this JSON:
 }
 ```
 
-## Notes for us (not sent to the model)
+## Notes (not sent to the model)
 
 * The judge sees the official value so it can tell whether the user's premise was wrong. It is told the
   number has already been scored so it doesn't re-grade accuracy.

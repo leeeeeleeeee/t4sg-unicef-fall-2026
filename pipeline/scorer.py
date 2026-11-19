@@ -9,16 +9,20 @@ Usage:
 For every row it:
   1. pulls the headline number (from `headline_number` if already filled, otherwise from `answer`)
   2. compares it to the official value and records the difference (`number_value`, `number_diff`)
-  3. scores Number (Correct / Close / Wrong / No number), Year (Latest / Outdated / None),
+  3. scores Number (Correct / Close / Wrong / Portal lag / No number), Year (Latest / Outdated / None),
      Source (Primary / Secondary / Misattributed / None)
   4. tags the error types it can detect by rule (the AI judge in judge.py adds sycophancy,
      narrative distortion and pattern answers)
 
-Scoring rules (final say: Kleef; full text in docs/scoring_rules.md):
-  Correct  inside the official uncertainty range; if no range, within +/-1 unit (1 percentage point)
-  Close    not Correct, but within CLOSE_PP = 3 percentage points of the Correct band (percent indicators),
-           or within CLOSE_REL = 10% of the official value (rates such as deaths per 1,000)
-  Wrong    anything further away
+Scoring rules (full text in docs/scoring_rules.md):
+  Correct     inside the official uncertainty range; if no range, within +/-1 unit (1 percentage point)
+  Close       not Correct, but within CLOSE_PP = 3 percentage points of the Correct band (percent indicators),
+              or within CLOSE_REL = 10% of the official value (rates such as deaths per 1,000)
+  Wrong       anything further away
+  Portal lag  would be Close/Wrong against the answer key, but matches a NEWER UNICEF figure that the data
+              portal (and so our key) doesn't have yet. Newer figures are listed, with sources, in
+              data/newer_unicef_figures.csv (only rows with status=verified count). Answers that cite a newer
+              year from a primary source but match nothing on the list get a "possible portal lag" note to check.
   A range answer is scored by its midpoint; if the range contains the official value it is at least
   Close, and a range wider than 2x the Close cutoff can be at most Close (hedging is not Correct).
 """
@@ -449,8 +453,45 @@ def inconsistent_answers(df: pd.DataFrame, key_lookup: dict) -> set[int]:
     return flagged
 
 
+# --------------------------------------------------------------- portal lag --
+NEWER_FIGURES_PATH = os.path.join(ROOT, "data", "newer_unicef_figures.csv")
+_newer_cache: dict | None = None
+
+
+def load_newer_figures(path: str = NEWER_FIGURES_PATH) -> dict[str, list[dict]]:
+    """Verified newer UNICEF figures (not yet in the data portal), keyed by prompt id."""
+    if not os.path.exists(path):
+        return {}
+    out: dict[str, list[dict]] = {}
+    for r in read_csv_str(path).to_dict("records"):
+        if r.get("id") and (r.get("status") or "").strip().lower() == "verified":
+            out.setdefault(r["id"], []).append(r)
+    return out
+
+
+def check_portal_lag(value: float | None, key: dict, newer: list[dict]) -> dict | None:
+    """The newer UNICEF figure this answer matches (Correct-band rules), if any."""
+    if value is None:
+        return None
+    key_year = to_float(key.get("year"))
+    for fig in newer:
+        v, y = to_float(fig.get("value")), to_float(fig.get("year"))
+        if v is None or (key_year is not None and y is not None and y <= key_year):
+            continue
+        lo, hi = to_float(fig.get("range_low")), to_float(fig.get("range_high"))
+        band = (lo, hi) if lo is not None and hi is not None else (v - CORRECT_TOL, v + CORRECT_TOL)
+        if band[0] - 1e-9 <= value <= band[1] + 1e-9:
+            return fig
+    return None
+
+
 # ------------------------------------------------------------------ driver --
-def score_row(row: dict, prompt: dict, key: dict) -> dict:
+def score_row(row: dict, prompt: dict, key: dict, newer: dict[str, list[dict]] | None = None) -> dict:
+    global _newer_cache
+    if newer is None:
+        if _newer_cache is None:
+            _newer_cache = load_newer_figures()
+        newer = _newer_cache
     unit = key.get("unit", "")
     notes: list[str] = []
     headline_text = (row.get("headline_number") or "").strip()
@@ -468,6 +509,12 @@ def score_row(row: dict, prompt: dict, key: dict) -> dict:
         notes.append("id not in answer key")
     number_score, value, diff, n_notes = score_number(ans, key) if key else ("", ans.mid if ans else None, None, [])
     notes += n_notes
+    if key and number_score in ("Close", "Wrong"):
+        fig = check_portal_lag(value, key, newer.get(row.get("id", ""), []))
+        if fig:
+            number_score = "Portal lag"
+            notes.append(f"matches newer UNICEF figure {fig['value']} ({fig['year']}, {fig['source'][:60]}); "
+                         f"answer key/portal has {key.get('unicef_value')} ({key.get('year')})")
 
     if not (row.get("source_claimed") or "").strip() and answer:
         row["source_claimed"] = extract_sources(answer)
@@ -488,6 +535,13 @@ def score_row(row: dict, prompt: dict, key: dict) -> dict:
     if source_score == "Misattributed":
         errs.append("Source misattribution")
 
+    # Not on the verified list, but looks like it: a newer year than the key, from a primary source.
+    key_year = to_float((key or {}).get("year"))
+    if (number_score in ("Close", "Wrong") and year and key_year and year > key_year
+            and source_score == "Primary"):
+        notes.append(f"possible portal lag: answer cites {year}, newer than the key's {int(key_year)}; "
+                     "check the figure and add it to data/newer_unicef_figures.csv if UNICEF published it")
+
     if key and (key.get("data_exists") or "").upper() == "N":
         notes.append("no official value for the year asked (data_exists=N)")
 
@@ -503,14 +557,17 @@ def score_row(row: dict, prompt: dict, key: dict) -> dict:
     return row
 
 
-def score_file(results_path: str, answer_key_path: str, prompt_paths: list[str]) -> pd.DataFrame:
+def score_file(results_path: str, answer_key_path: str, prompt_paths: list[str],
+               newer_path: str = NEWER_FIGURES_PATH) -> pd.DataFrame:
     df = read_csv_str(results_path)
     for c in RESULTS_COLUMNS + SCORER_EXTRA_COLUMNS:
         if c not in df.columns:
             df[c] = ""
     key_lookup = load_answer_key(answer_key_path)
     prompts = load_prompts(prompt_paths)
-    rows = [score_row(dict(r), prompts.get(r["id"], {}), key_lookup.get(r["id"], {})) for r in df.to_dict("records")]
+    newer = load_newer_figures(newer_path)
+    rows = [score_row(dict(r), prompts.get(r["id"], {}), key_lookup.get(r["id"], {}), newer)
+            for r in df.to_dict("records")]
     out = pd.DataFrame(rows)
     for i in inconsistent_answers(out, key_lookup):
         et = out.at[i, "error_types"]
@@ -527,9 +584,11 @@ def main() -> None:
                     help="prompt CSV files and/or folders (default: prompts/)")
     ap.add_argument("--out", help="output path (default: <results>_scored.csv)")
     ap.add_argument("--inplace", action="store_true", help="overwrite the input file")
+    ap.add_argument("--newer-figures", default=NEWER_FIGURES_PATH,
+                    help="verified newer UNICEF figures for the Portal lag score (default: data/newer_unicef_figures.csv)")
     a = ap.parse_args()
 
-    out = score_file(a.results, a.answer_key, a.prompts)
+    out = score_file(a.results, a.answer_key, a.prompts, a.newer_figures)
     path = a.results if a.inplace else (a.out or re.sub(r"\.csv$", "", a.results) + "_scored.csv")
     out.to_csv(path, index=False)
     counts = out["number_score"].value_counts().to_dict()
