@@ -14,7 +14,7 @@ models:
     price_input_per_m: 0
     price_output_per_m: 0
     supports_thinking: true
-    supports_web_search: false
+    supports_web_search: true
 
 prompts: [prompts/new_prompts.csv]
 modes: [cold, skill]

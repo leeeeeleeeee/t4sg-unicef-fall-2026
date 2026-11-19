@@ -1,0 +1,16 @@
+run_name: demo
+models:
+  gemini-flash-lite:
+    provider: gemini
+    litellm_model: gemini/gemini-3.5-flash-lite
+    price_input_per_m: 0
+    price_output_per_m: 0
+    supports_thinking: true
+    supports_web_search: true
+prompts: [config/runs/demo_prompts.csv]
+modes: [cold, skill]
+skill_file: skills/unicef_skill.md
+thinking: [false]
+web_search: [false, true]
+repeats: 1
+budget_usd: 0.05
